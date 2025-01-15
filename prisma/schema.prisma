@@ -32,7 +32,7 @@ model User {
   email           String          @unique(map: "user_email_idx")
   emailVerified   DateTime?       @db.Timestamp(6)
   image           String?         
-  password        String?         // Magic link - passwordless login
+  password        String?         // TO-DO: Magic link - passwordless login
   role            String          @default("user")
   adress          Json?           @db.Json()
   paymentMethod   String?

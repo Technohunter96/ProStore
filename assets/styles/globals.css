@@ -10,6 +10,7 @@
   .flex-start {
     @apply flex justify-start items-center;
   }
+
   .flex-center {
     @apply flex justify-center items-center;
   }
@@ -28,6 +29,10 @@
 
   .h3-bold {
     @apply font-bold text-xl lg:text-2xl;
+  }
+
+  .link {
+    @apply hover:underline;
   }
 }
 
@@ -59,6 +64,7 @@
     --chart-5: 27 87% 67%;
     --radius: 0.5rem;
   }
+
   .dark {
     --background: 222.2 84% 4.9%;
     --foreground: 210 40% 98%;
@@ -97,6 +103,7 @@
   * {
     @apply border-border;
   }
+
   body {
     @apply bg-background text-foreground;
   }
