@@ -1,7 +1,7 @@
 import { Button } from '@/components/ui/button';
 import ModeToggle from './mode-toggle';
 import Link from 'next/link';
-import { AlignJustify, ShoppingCartIcon, User, UserIcon } from 'lucide-react';
+import { AlignJustify, ShoppingCartIcon } from 'lucide-react';
 import {
   Sheet,
   SheetContent,
