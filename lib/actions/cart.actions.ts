@@ -7,7 +7,6 @@ import { auth } from '@/auth';
 import { prisma } from '@/db/prisma';
 import { cartItemSchema, insertCartSchema } from '../validators';
 import { revalidatePath } from 'next/cache';
-import ProductCard from '@/components/shared/product/product-card';
 import { Prisma } from '@prisma/client';
 
 // Calculate cart prices
