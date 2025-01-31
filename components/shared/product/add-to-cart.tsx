@@ -64,16 +64,16 @@ const AddToCart = ({ cart, item }: { cart?: Cart; item: CartItem }) => {
 
   return existItem ? (
     <>
-      <Button type='button' variant='outline' onClick={handleRemoveFromCart}>
+      <Button type='button' variant='outline' onClick={handleRemoveFromCart} disabled={isPending}>
         {isPending ? <Loader className='h-4 w-4 animate-spin' /> : <Minus className='h-4 w-4' />}
       </Button>
       <span className='px-2'>{existItem.qty}</span>
-      <Button type='button' variant='outline' onClick={handleAddToCart}>
+      <Button type='button' variant='outline' onClick={handleAddToCart} disabled={isPending}>
         {isPending ? <Loader className='h-4 w-4 animate-spin' /> : <Plus className='h-4 w-4' />}
       </Button>
     </>
   ) : (
-    <Button className='w-full' type='button' onClick={handleAddToCart}>
+    <Button className='w-full' type='button' onClick={handleAddToCart} disabled={isPending}>
       {isPending ? <Loader className='h-4 w-4 animate-spin' /> : <Plus className='h-4 w-4' />} Add
       To Cart
     </Button>

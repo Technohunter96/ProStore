@@ -1,10 +1,4 @@
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from '@/components/ui/card';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { APP_NAME } from '@/lib/constants';
 import { Metadata } from 'next';
 import Image from 'next/image';
@@ -44,9 +38,7 @@ const SignInPage = async (props: {
             />
           </Link>
           <CardTitle className='text-center'>Sign In</CardTitle>
-          <CardDescription className='text-center'>
-            Sign in to your account
-          </CardDescription>
+          <CardDescription className='text-center'>Sign in to your account</CardDescription>
         </CardHeader>
         <CardContent className='space-y-4'>
           <CredentialsSignInForm />

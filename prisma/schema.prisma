@@ -34,7 +34,7 @@ model User {
   image           String?       
   password        String?       // TO-DO: Magic link - passwordless login
   role            String        @default("user")
-  adress          Json?         @db.Json()
+  address          Json?         @db.Json()
   paymentMethod   String?
   createdAt       DateTime      @default(now()) @db.Timestamp(6)
   updatedAt       DateTime      @updatedAt
