@@ -7,6 +7,7 @@ export const authConfig = {
     authorized({ request, auth }: any) {
       // Array of regex patterns of paths we want to protect
       const protectedPaths = [
+        /\/cart/,
         /\/shipping-address/,
         /\/payment-method/,
         /\/place-order/,
@@ -20,7 +21,10 @@ export const authConfig = {
       const { pathname } = request.nextUrl;
 
       // Check if user is not authenticated and accessing a protected path
-      if (!auth && protectedPaths.some((p) => p.test(pathname))) return false;
+      if (!auth && protectedPaths.some((path) => path.test(pathname))) {
+        // Redirect to the sign-in page
+        return NextResponse.redirect(new URL('/sign-in', request.url));
+      }
 
       // Check for session cart cookie
       if (!request.cookies.get('sessionCartId')) {

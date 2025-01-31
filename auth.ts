@@ -73,8 +73,7 @@ export const config = {
         // If user has no name then use the email (in cases like registration through google)
         if (user.name === 'NO_NAME') {
           token.name =
-            user.email.split('@')[0].charAt(0).toUpperCase() +
-            user.email.split('@')[0].slice(1);
+            user.email.split('@')[0].charAt(0).toUpperCase() + user.email.split('@')[0].slice(1);
 
           // Update database to reflect the token name
           await prisma.user.update({
@@ -83,6 +82,7 @@ export const config = {
           });
         }
 
+        // Preserve the cart for unsigned users during signIn/signUp by linking the session cart to the user
         if (trigger === 'signIn' || trigger === 'signUp') {
           const cookiesObject = await cookies();
           const sessionCartId = cookiesObject.get('sessionCartId')?.value;
