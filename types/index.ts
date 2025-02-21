@@ -15,16 +15,20 @@ export type Product = z.infer<typeof insertProductSchema> & {
 };
 
 export type Cart = z.infer<typeof insertCartSchema>;
+
 export type CartItem = z.infer<typeof cartItemSchema>;
+
 export type ShippingAddress = z.infer<typeof shippingAddressSchema>;
+
 export type OrderItem = z.infer<typeof insertOrderItemSchema>;
+
 export type Order = z.infer<typeof insertOrderSchema> & {
   id: string; // it's not in zodSchema bcs we are not adding it in form (it will be error if it was included in chema but not added in form)
   createdAt: Date;
-  isPaid: Boolean;
+  isPaid: boolean;
   paidAt: Date | null;
-  isDelivered: Boolean;
+  isDelivered: boolean;
   deliveredAt: Date | null;
-  orderItems: OrderItem[];
+  orderitems: OrderItem[];
   user: { name: string; email: string };
 };
