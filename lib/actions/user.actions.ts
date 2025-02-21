@@ -13,6 +13,7 @@ import { prisma } from '@/db/prisma';
 import { formatError } from '../utils';
 import { ShippingAddress } from '@/types';
 import { z } from 'zod';
+import { getMyCart } from './cart.actions';
 
 // Sign in the user with the credentials
 export async function signInWithCredentials(prevState: unknown, formData: FormData) {
@@ -37,6 +38,9 @@ export async function signInWithCredentials(prevState: unknown, formData: FormDa
 
 // Sign user out - kill cookie, token etc.
 export async function signOutUser() {
+  // get current users cart and delete it.
+  const currentCart = await getMyCart();
+  await prisma.cart.delete({ where: { id: currentCart?.id } }); // Deleting prisma cart
   await signOut();
 }
 
