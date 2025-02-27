@@ -1,4 +1,3 @@
-import { createOrder } from '@/lib/actions/order.actions';
 const base = process.env.PAYPAL_API_URL || 'https://api-m.sandbox.paypal.com';
 
 export const paypal = {
@@ -39,6 +38,7 @@ export const paypal = {
         Authorization: `Bearer ${accessToken}`,
       },
     });
+
     return handleResponse(response);
   },
 };
