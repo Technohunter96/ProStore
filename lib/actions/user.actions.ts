@@ -37,10 +37,16 @@ export async function signInWithCredentials(prevState: unknown, formData: FormDa
 }
 
 // Sign user out - kill cookie, token etc.
+// Sign user out
 export async function signOutUser() {
-  // get current users cart and delete it.
+  // get current users cart and delete it so it does not persist to next user
   const currentCart = await getMyCart();
-  await prisma.cart.delete({ where: { id: currentCart?.id } }); // Deleting prisma cart
+
+  if (currentCart?.id) {
+    await prisma.cart.delete({ where: { id: currentCart.id } });
+  } else {
+    console.warn('No cart found for deletion.');
+  }
   await signOut();
 }
 
@@ -137,6 +143,29 @@ export async function updateUserPaymentMethod(data: z.infer<typeof paymentMethod
     await prisma.user.update({
       where: { id: currentUser.id },
       data: { paymentMethod: paymentMethod.type },
+    });
+
+    return {
+      success: true,
+      message: 'User updated successfully',
+    };
+  } catch (error) {
+    return { success: false, message: formatError(error) };
+  }
+}
+
+// Update the user profile
+export async function updateProfile(user: { name: string; email: string }) {
+  try {
+    const session = await auth();
+    const currentUser = await prisma.user.findFirst({
+      where: { id: session?.user?.id },
+    });
+    if (!currentUser) throw new Error('User not found');
+
+    await prisma.user.update({
+      where: { id: currentUser.id },
+      data: { name: user.name },
     });
 
     return {

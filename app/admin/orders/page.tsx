@@ -1,9 +1,6 @@
+import { requireAdmin } from '@/lib/auth-guard';
+import { deleteOrder, getAllOrders } from '@/lib/actions/order.actions';
 import { Metadata } from 'next';
-import { getMyOrders } from '@/lib/actions/order.actions';
-import { formatCurrency, formatDateTime, formatId } from '@/lib/utils';
-import Link from 'next/link';
-import { Badge } from '@/components/ui/badge';
-import { Button } from '@/components/ui/button';
 import {
   Table,
   TableBody,
@@ -12,17 +9,25 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table';
+import { formatCurrency, formatDateTime, formatId } from '@/lib/utils';
+import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
+import Link from 'next/link';
 import Pagination from '@/components/shared/pagination';
+import DeleteDialog from '@/components/shared/delete-dialog';
 
 export const metadata: Metadata = {
-  title: 'My Orders',
+  title: 'Admin Orders',
 };
 
-const OrdersPage = async (props: { searchParams: Promise<{ page: string }> }) => {
+const AdminOrders = async (props: { searchParams: Promise<{ page: string }> }) => {
+  await requireAdmin();
+
   const { page } = await props.searchParams;
 
-  const orders = await getMyOrders({
+  const orders = await getAllOrders({
     page: Number(page) || 1,
+    limit: 3,
   });
 
   return (
@@ -61,9 +66,10 @@ const OrdersPage = async (props: { searchParams: Promise<{ page: string }> }) =>
                   )}
                 </TableCell>
                 <TableCell>
-                  <Button asChild variant='outline' size='sm'>
+                  <Button asChild variant='outline'>
                     <Link href={`/order/${order.id}`}>Details</Link>
                   </Button>
+                  <DeleteDialog id={order.id} action={deleteOrder} />
                 </TableCell>
               </TableRow>
             ))}
@@ -77,4 +83,4 @@ const OrdersPage = async (props: { searchParams: Promise<{ page: string }> }) =>
   );
 };
 
-export default OrdersPage;
+export default AdminOrders;
