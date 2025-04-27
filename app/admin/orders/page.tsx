@@ -27,7 +27,7 @@ const AdminOrders = async (props: { searchParams: Promise<{ page: string }> }) =
 
   const orders = await getAllOrders({
     page: Number(page) || 1,
-    limit: 3,
+    // limit: 4,
   });
 
   return (
