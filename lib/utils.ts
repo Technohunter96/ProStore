@@ -134,3 +134,14 @@ export function formUrlQuery({
     },
   );
 }
+
+// Capitalize first letter of word
+export function capitalizeFirstLetter(text: string): string {
+  if (!text) {
+    return '';
+  }
+
+  const lowerCaseRest = text.slice(1).toLowerCase();
+
+  return text.charAt(0).toUpperCase() + lowerCaseRest;
+}

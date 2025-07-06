@@ -307,8 +307,32 @@ export async function getOrderSummary() {
 }
 
 // Get all orders
-export async function getAllOrders({ limit = PAGE_SIZE, page }: { limit?: number; page: number }) {
+export async function getAllOrders({
+  query,
+  limit = PAGE_SIZE,
+  page,
+}: {
+  query: string;
+  limit?: number;
+  page: number;
+}) {
+  // Query filter order by buyer name
+  const queryFilter: Prisma.OrderWhereInput =
+    query && query !== 'all'
+      ? {
+          user: {
+            name: {
+              contains: query,
+              mode: 'insensitive',
+            } as Prisma.StringFilter,
+          },
+        }
+      : {};
+
   const data = await prisma.order.findMany({
+    where: {
+      ...queryFilter,
+    },
     orderBy: { createdAt: 'desc' },
     take: limit,
     skip: (page - 1) * limit,
@@ -335,7 +359,7 @@ export async function deleteOrder(id: string) {
       message: 'Order deleted successfully',
     };
   } catch (error) {
-    return { usccess: false, message: formatError(error) };
+    return { success: false, message: formatError(error) };
   }
 }
 
