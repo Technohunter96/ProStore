@@ -8,7 +8,6 @@ import {
   useStripe,
 } from '@stripe/react-stripe-js';
 import { useTheme } from 'next-themes';
-import { Divide } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { formatCurrency } from '@/lib/utils';
 import { SERVER_URL } from '@/lib/constants';
