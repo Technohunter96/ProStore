@@ -1,7 +1,6 @@
 import { Resend } from 'resend';
 import { SENDER_EMAIL, APP_NAME } from '@/lib/constants';
 import { Order } from '@/types';
-import { object } from 'zod';
 // eslint-disable-next-line @typescript-eslint/no-require-imports
 require('dotenv').config();
 
