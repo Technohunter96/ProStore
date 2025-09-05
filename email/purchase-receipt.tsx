@@ -101,7 +101,7 @@ export default function PurchaseReceiptEmail({ order }: OrderInformationProps) {
             <Section className='border border-solid border-gray-500 rounded-lg p-4 md:p-6 my-4'>
               {order.orderitems.map((item) => (
                 <Row key={item.productId} className='mt-8'>
-                  <Column className='w-20'>
+                  <Column className='w-20 mr-2'>
                     <Img
                       width='80'
                       alt={item.name}
