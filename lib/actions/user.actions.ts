@@ -41,7 +41,6 @@ export async function signInWithCredentials(prevState: unknown, formData: FormDa
 }
 
 // Sign user out - kill cookie, token etc.
-// Sign user out
 export async function signOutUser() {
   // get current users cart and delete it so it does not persist to next user
   const currentCart = await getMyCart();
